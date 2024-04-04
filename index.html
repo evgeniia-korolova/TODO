@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODO</title>
-</head>
-<body>
-    
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>TODO</title>
+		<link
+			rel="stylesheet"
+			href="./style.css" />
+	</head>
+	<body>
+		<h1 class="hidden">To Do List</h1>
+		<div class="wrapper">
+			<section class="menu">
+				<div class="menu__container">
+					<ul class="list">
+						<li class="list__item">All tasks</li>
+						<li class="list__item">Today</li>
+						<li class="list__item">Overdue</li>
+						<li class="list__item">Personal</li>
+						<li class="list__item">Study</li>
+						<li class="list__item">Work</li>
+					</ul>
+				</div>
+			</section>
+			<section class="list">
+				<div class="list__container">
+					<div class="input__panel">
+						<label class="add-task__label"></label>
+						<input
+							type="text"
+							id="task-input" 
+                            autocomplete="off"/>
+                            <button class="add-task__btn">Add</button>
+					</div>
+					<div class="task__list">
+						<div class="start__text">No tasks</div>
+					</div>
+				</div>
+			</section>
+		</div>
+        <script src="./main.js"></script>
+	</body>
 </html>
