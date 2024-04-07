@@ -17,6 +17,8 @@ function createTask(task) {
 
     let deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Del';
+    // deleteBtn.classList.add ('delete-task__btn');
+    deleteBtn.setAttribute('data-delete-btn', 'delete-task__btn');
 
     let changeTaskBtn = document.createElement('button');
     changeTaskBtn.textContent = 'Change Task';
@@ -60,6 +62,16 @@ taskList.addEventListener('click', (event) => {
     } else {
         target.nextSibling.classList.remove('completed-task');
     }
-        
-    
 })
+
+taskList.addEventListener('click', deleteTask);
+
+function deleteTask(event) {
+    let target = event.target;
+    console.log(target)
+    if (target.dataset.deleteBtn == 'delete-task__btn') {
+
+		target.parentElement.classList.remove('task-block');
+		target.parentElement.classList.add('hidden');
+	}
+}

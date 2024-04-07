@@ -47,3 +47,7 @@ ul {
 .completed-task {
     text-decoration:line-through;
 }
+
+.delete-task__btn {
+    background: blue;
+}
