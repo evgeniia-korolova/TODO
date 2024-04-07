@@ -49,3 +49,17 @@ function addTaskHandler() {
         // inputLabel.classList.add('warning');
     }
 }
+
+
+
+taskList.addEventListener('click', (event) => {
+    let target = event.target;
+    if (target.tagName !== 'INPUT' && target.type !== 'checkbox') return;
+    if (target.checked) {
+        target.nextSibling.classList.add('completed-task');
+    } else {
+        target.nextSibling.classList.remove('completed-task');
+    }
+        
+    
+})

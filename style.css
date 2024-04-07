@@ -43,3 +43,7 @@ ul {
 .warning {
     color: red;
 }
+
+.completed-task {
+    text-decoration:line-through;
+}
