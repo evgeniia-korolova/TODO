@@ -1,53 +1,117 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--accent-color: rgb(44, 47, 111);
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
 }
 
 .hidden {
-    display: none;
+	display: none;
 }
 ul {
-    list-style: none;
+	list-style: none;
 }
 .wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    padding: 50px;
-    border: 1px solid purple;
-    border-radius: 1rem;
-    gap: 50px;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 50px;
 }
 
+.header__container {
+	display: flex;
+	flex-direction: column;
+}
+.header__title {
+	font-family: 'Rubik Doodle Shadow', system-ui;
+	color: rgb(18, 18, 99);
+	color: var(--accent-color);
+	margin-bottom: 30px;
+    text-shadow: 2px 2px 2px rgb(74, 80, 177);;
+}
+
+.header__time {
+	font-size: 32px;
+	color: var(--accent-color);
+}
+
+.main__container {
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+}
+.menu {
+	flex-basis: 30%;
+}
 .menu__container,
 .list__container {
-    padding: 50px;
-    background: rgb(250, 231, 250);
-    border: 1px solid purple;
-    border-radius: 1rem;
+	padding: 50px;
+	background: rgb(250, 231, 250);
+	box-shadow: 4px 4px 6px var(--accent-color),
+		-4px -4px 6px var(--accent-color),
+        4px -4px 6px var(--accent-color),
+        -4px 4px 6px var(--accent-color);
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;    
+}
+
+.menu__list {
     display: flex;
     flex-direction: column;
+    gap: 20px;
+}
+.list {
+	flex-basis: 60%;
 }
 
 .input__panel {
-    margin-bottom: 50px;
+	margin-bottom: 50px;
+	display: flex;
+	gap: 30px;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.task-input {
+	flex-basis: 80%;
+}
+
+.add-task__btn {
+	cursor: pointer;
 }
 
 .task-block {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+	display: flex;
+	gap: 1rem;
+	margin-top: 1rem;
+}
+
+.task__text {
+    flex-basis: 80%;
 }
 
 .warning {
-    color: red;
+	color: red;
 }
 
 .completed-task {
-    text-decoration:line-through;
+	text-decoration: line-through;
 }
 
 .delete-task__btn {
-    background: blue;
+	width: 28px;
+	height: 28px;
+	border: none;
+	outline: none;
+	background: transparent;
+	background-image: url('./img/garbage-bin.png');
+	cursor: pointer;
+    margin-left: auto;
 }
