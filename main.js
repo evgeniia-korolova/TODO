@@ -13,6 +13,14 @@ function showTime() {
 }
 showTime();
 
+function getZero(num) {
+	if (num >= 0 && num < 10) {
+		return '0' + num;
+	} else {
+		return num;
+	}
+}
+
 function setDate() {
 	const now = new Date();
 	let currentMonth,
@@ -21,20 +29,24 @@ function setDate() {
 		currentMinutes;
 	
 	let month = now.getMonth() + 1;
-	if (month < 10) currentMonth = '0' + month;
-	else currentMonth = month;
+	currentMonth = getZero(month);
+	// if (month < 10) currentMonth = '0' + month;
+	// else currentMonth = month;
 
 	let date = now.getDate();
-	if (date < 10) currentDate = '0' + date;
-	else currentDate = date;
+	// if (date < 10) currentDate = '0' + date;
+	// else currentDate = date;
+	currentDate = getZero(date);
 
 	let hours = now.getHours();
-	if (hours < 10) currentHour = '0' + hours;
-	else currentHour = hours;
+	// if (hours < 10) currentHour = '0' + hours;
+	// else currentHour = hours;
+	currentHour = getZero(hours);
 
 	let minutes = now.getMinutes();
-	if (minutes < 10) currentMinutes = '0' + minutes;
-	else currentMinutes = minutes;
+	// if (minutes < 10) currentMinutes = '0' + minutes;
+	// else currentMinutes = minutes;
+	currentMinutes = getZero(minutes);
 
 
 	let currentTime = `${currentDate}.${currentMonth}.${now.getFullYear()}  ${currentHour}:${currentMinutes}`;
