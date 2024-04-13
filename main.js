@@ -4,6 +4,8 @@ const taskList = document.querySelector('.task__list');
 const startMessage = document.querySelector('.start__text');
 const inputLabel = document.querySelector('.add-task__label');
 const headerWrapper = document.querySelector('.header__container');
+const formTaskBtn = document.querySelector('.category-btn');
+const modalCloseBtn = document.querySelector('.modal__close');
 
 function showTime() {
 	const timeDiv = document.createElement('div');
@@ -30,22 +32,15 @@ function setDate() {
 	
 	let month = now.getMonth() + 1;
 	currentMonth = getZero(month);
-	// if (month < 10) currentMonth = '0' + month;
-	// else currentMonth = month;
+	
 
-	let date = now.getDate();
-	// if (date < 10) currentDate = '0' + date;
-	// else currentDate = date;
+	let date = now.getDate();	
 	currentDate = getZero(date);
 
-	let hours = now.getHours();
-	// if (hours < 10) currentHour = '0' + hours;
-	// else currentHour = hours;
+	let hours = now.getHours();	
 	currentHour = getZero(hours);
 
-	let minutes = now.getMinutes();
-	// if (minutes < 10) currentMinutes = '0' + minutes;
-	// else currentMinutes = minutes;
+	let minutes = now.getMinutes();	
 	currentMinutes = getZero(minutes);
 
 
@@ -55,7 +50,14 @@ function setDate() {
 
 console.log(setDate());
 
-addTaskBtn.addEventListener('click', addTaskHandler);
+addTaskBtn.addEventListener('click', handleModal);
+modalCloseBtn.addEventListener('click', handleModal);
+formTaskBtn.addEventListener('click', addTaskHandler);
+
+function handleModal() {
+	const modal = document.querySelector('.modal');
+	modal.classList.toggle('hidden');
+}
 
 function createTask(task) {
 	let taskBlock = document.createElement('div');
@@ -63,9 +65,10 @@ function createTask(task) {
 	let checkbox = document.createElement('input');
 	checkbox.type = 'checkbox';
 
-	let taskText = document.createElement('p');
-	taskText.textContent = task;
-	taskText.classList.add('.task__text');
+	let taskText = document.createElement('input');
+	taskText.value = task;
+	taskText.type = 'text';
+	taskText.classList.add('task__text');
 
 	let deleteBtn = document.createElement('button');
 	
@@ -78,6 +81,7 @@ function createTask(task) {
 	// deleteBtn.append(deleteBtnImg);
 
 	let changeTaskBtn = document.createElement('button');
+	changeTaskBtn.classList.add('btn');
 	changeTaskBtn.textContent = 'Edit';
 
 	taskBlock.append(checkbox);
@@ -99,6 +103,7 @@ function addTaskHandler() {
 	} else {
 		taskInput.placeholder = 'Add new task';		
 	}
+	handleModal();
 }
 
 taskList.addEventListener('click', (event) => {
@@ -121,4 +126,8 @@ function deleteTask(event) {
 		target.parentElement.classList.remove('task-block');
 		target.parentElement.classList.add('hidden');
 	}
+}
+
+function editTask() {
+
 }

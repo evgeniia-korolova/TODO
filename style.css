@@ -6,17 +6,36 @@
 
 :root {
 	--accent-color: rgb(44, 47, 111);
+	--bg-main: rgb(250, 231, 250);
 }
+
+/* input:not([type="radio"]):not([type="checkbox"]), button {
+	appearance: none;
+	border: none;
+	outline: none;
+	background: none;
+	cursor: initial;
+} */
 
 body {
 	font-family: 'Roboto', sans-serif;
 }
 
-.hidden {
-	display: none;
-}
+
 ul {
 	list-style: none;
+}
+
+.btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: .3rem .5rem;
+	border-radius: .3rem .5rem;
+	border: 2px solid var(--accent-color);
+	background: var(--accent-color);
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
 }
 .wrapper {
 	max-width: 1200px;
@@ -81,6 +100,7 @@ ul {
 
 .task-input {
 	flex-basis: 80%;
+	padding: .3rem 1.4rem;
 }
 
 .add-task__btn {
@@ -89,12 +109,19 @@ ul {
 
 .task-block {
 	display: flex;
+	align-items: center;
 	gap: 1rem;
 	margin-top: 1rem;
 }
 
 .task__text {
-    flex-basis: 80%;
+    /* flex-basis: 80%; */
+	background: var(--bg-main);
+	outline: none;
+	border: none;
+	display: block;
+	flex-grow: 1;
+	font-family: 'Roboto', sans-serif;
 }
 
 .warning {
@@ -114,4 +141,109 @@ ul {
 	background-image: url('./img/garbage-bin.png');
 	cursor: pointer;
     margin-left: auto;
+}
+
+/* modal */
+
+.modal {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+ background-color: rgba(0,0,0,.5);
+z-index: 5;
+}
+
+.modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 36px;
+    color: #000;
+    opacity: .8;
+    font-weight: 700;
+    border: none;
+    background-color: transparent;
+    cursor: pointer
+}
+
+.modal__dialog {
+	/* width: 70vh; */
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: floralwhite;
+	border: 2px solid var(--accent-color);
+	padding: 2rem;
+	border-radius: 1rem;
+	z-index: 6;
+	opacity: 1;
+}
+
+.modal__title {
+	text-align: center;
+	margin-bottom: 1.5rem;
+	font-size: 2rem;
+	color: var(--accent-color);
+}
+.options {
+	
+	display: grid;
+	grid-template-columns: repeat(3, 30%);
+	grid-gap: 1rem;
+}
+
+.options label {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: .3rem;
+	background: #e99393;
+	padding: 1.7rem;
+	border-radius: .5rem;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+input[type = "radio"] {
+	display: none;
+}
+
+.bubble {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	border: 2px solid var(--accent-color);
+}
+
+.bubble::after {
+	content: '';
+	display: block;
+	opacity: 0;
+	width: 0;
+	height: 0;
+	background-color: rgb(91, 5, 30);
+	border-radius: 50%;
+	transition: .2s ease-in-out;
+}
+
+input:checked ~ .bubble::after {
+	width: 8px;
+	height: 8px;
+	opacity: 1;
+}
+
+.category-btn {
+	grid-column: 2/3;
+	margin-top: 1.5rem;
+	font-size: 28px;
+}
+
+.hidden {
+	display: none;
 }
