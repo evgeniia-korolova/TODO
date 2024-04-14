@@ -53,9 +53,19 @@ modalCloseBtn.addEventListener('click', handleModal);
 formTaskBtn.addEventListener('click', addTaskHandler);
 // formTaskBtn.addEventListener('click', handleCategory);
 
-function handleModal() {
-	const modal = document.querySelector('.modal');
-	modal.classList.toggle('hidden');
+function handleModal() {	
+
+	if (taskInput.value) {
+		startMessage.classList.add('hidden');
+
+		const modal = document.querySelector('.modal');
+		modal.classList.toggle('hidden');
+		
+	} else {
+		taskInput.placeholder = 'Add new task';
+		
+	}
+	
 }
 
 
@@ -103,11 +113,10 @@ function addTaskHandler(event) {
 		startMessage.classList.add('hidden');
 
 		let newTask = createTask(taskInput.value);
-		
-	
+
 		taskList.append(newTask);
 		counter++;
-		
+
 		// let category;
 		// options.forEach((item) => {
 		// 	item.addEventListener('click', (event) => {
@@ -129,13 +138,12 @@ function addTaskHandler(event) {
 
 		todoArr.push(todoObj);
 		console.log(todoArr);
-				
-		taskInput.value = '';
-
+		
 	} else {
 		taskInput.placeholder = 'Add new task';
 	}
 	handleModal();
+	taskInput.value = '';
 }
 
 
