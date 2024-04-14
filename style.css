@@ -7,6 +7,7 @@
 :root {
 	--accent-color: rgb(44, 47, 111);
 	--bg-main: rgb(250, 231, 250);
+	--warning-color: rgb(236, 5, 5);
 }
 
 /* input:not([type="radio"]):not([type="checkbox"]), button {
@@ -121,7 +122,11 @@ ul {
 	flex-grow: 1;
 	padding: .3rem 1.4rem;
 	border: 1px solid var(--accent-color);
+}
 
+.task-input::placeholder {
+	color: red;
+	font-weight: 600;
 }
 
 .add-task__btn {
@@ -155,13 +160,15 @@ ul {
 	flex: 1 1 0%;
 }
 
+.task-input__warning {
+	border: 1px solid var(--warning-color);
+}
+
 input[type="checkbox"] {
 	cursor: pointer;
 }
 
-.warning {
-	color: red;
-}
+
 
 .completed-task {
 	text-decoration: line-through;
@@ -220,7 +227,7 @@ z-index: 5;
 .modal__title {
 	text-align: center;
 	margin-bottom: 1.5rem;
-	font-size: 2rem;
+	font-size: 1.4rem;
 	color: var(--accent-color);
 }
 .options {
@@ -281,4 +288,8 @@ input:checked ~ .bubble::after {
 
 .hidden {
 	display: none;
+}
+
+.warning {
+	color: var(--warning-color);
 }

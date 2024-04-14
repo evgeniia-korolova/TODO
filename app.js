@@ -12,7 +12,7 @@ const options = document.querySelectorAll('.bubble');
 const newTodoForm = document.querySelector('#new-todo-form');
 
 let counter = 0,
-    currentCategory = '',
+    
     todos = [],
 	category;
 
@@ -25,33 +25,44 @@ modalCloseBtn.addEventListener('click', handleModal);
 
 newTodoForm.addEventListener('submit', e => {
     e.preventDefault();
-    console.log(e.target)
+   
+    // let task = taskInput.value;
+    let currentContent = e.target.elements.content.value;
+    let currentCategory = e.target.elements.category.value;
     
+    if (!currentContent) {
+        taskInput.placeholder = 'Add new task';
+        taskInput.classList.toggle('task-input__warning');
+    }
+    else if (!currentCategory) { 
+        document.querySelector('.modal__title ').classList.add('warning');
+    } else {
+       
+        startMessage.classList.add('hidden');
+        document.querySelector('.modal__title ').classList.remove('warning');
 
-    let currentContent = taskInput.value;
-    // const category = categorySelect.value;
-    
-    
+		const todo = {
+			content: currentContent,
+			category: currentCategory,
+			completed: false,
+			id: todos.length + 1,
+			createdAt: new Date().getTime(),
+		};
+
+		todos.push(todo);
+		let newTask = createTask(taskInput.value);
+
+		taskList.append(newTask);
+		e.target.reset(currentContent);
+		taskInput.placeholder = '';
+
+		handleModal();
+    }
  
-    const todo = {
-		content: e.target.elements.content.value,
-		category: e.target.elements.category.value,
-        completed: false,
-        id: todos.length + 1,
-		createdAt: new Date().getTime(),
-	};
-
-    todos.push(todo);
-    let newTask = createTask(taskInput.value);
-
     
-
-	taskList.append(newTask);
     console.log(todos);
 
-    e.target.reset(currentContent);
-   
-    handleModal();
+    
 })
 
 function createTask(task) {
