@@ -6,7 +6,10 @@ const inputLabel = document.querySelector('.add-task__label');
 const headerWrapper = document.querySelector('.header__container');
 const formTaskBtn = document.querySelector('.category-btn');
 const modalCloseBtn = document.querySelector('.modal__close');
+const options = document.querySelectorAll('.bubble');
 
+let counter = 0,
+	category = '';
 function showTime() {
 	const timeDiv = document.createElement('div');
 	timeDiv.classList.add('header__time');
@@ -25,24 +28,19 @@ function getZero(num) {
 
 function setDate() {
 	const now = new Date();
-	let currentMonth,
-		currentDate,
-		currentHour,
-		currentMinutes;
-	
+	let currentMonth, currentDate, currentHour, currentMinutes;
+
 	let month = now.getMonth() + 1;
 	currentMonth = getZero(month);
-	
 
-	let date = now.getDate();	
+	let date = now.getDate();
 	currentDate = getZero(date);
 
-	let hours = now.getHours();	
+	let hours = now.getHours();
 	currentHour = getZero(hours);
 
-	let minutes = now.getMinutes();	
+	let minutes = now.getMinutes();
 	currentMinutes = getZero(minutes);
-
 
 	let currentTime = `${currentDate}.${currentMonth}.${now.getFullYear()}  ${currentHour}:${currentMinutes}`;
 	return currentTime;
@@ -53,11 +51,16 @@ console.log(setDate());
 addTaskBtn.addEventListener('click', handleModal);
 modalCloseBtn.addEventListener('click', handleModal);
 formTaskBtn.addEventListener('click', addTaskHandler);
+// formTaskBtn.addEventListener('click', handleCategory);
 
 function handleModal() {
 	const modal = document.querySelector('.modal');
 	modal.classList.toggle('hidden');
 }
+
+
+
+const todoArr = [];
 
 function createTask(task) {
 	let taskBlock = document.createElement('div');
@@ -71,8 +74,8 @@ function createTask(task) {
 	taskText.classList.add('task__text');
 
 	let deleteBtn = document.createElement('button');
-	
-	deleteBtn.classList.add ('delete-task__btn');
+
+	deleteBtn.classList.add('delete-task__btn');
 	deleteBtn.setAttribute('data-delete-btn', 'delete-task__btn');
 	// let deleteBtnImg = document.createElement('img');
 	// deleteBtnImg.src = './img/garbage-bin.svg';
@@ -92,21 +95,53 @@ function createTask(task) {
 	return taskBlock;
 }
 
-function addTaskHandler() {
+
+
+function addTaskHandler(event) {
+	event.preventDefault();
 	if (taskInput.value) {
 		startMessage.classList.add('hidden');
 
 		let newTask = createTask(taskInput.value);
-		taskList.append(newTask);
-		taskInput.value = '';
 		
+	
+		taskList.append(newTask);
+		counter++;
+		
+		// let category;
+		// options.forEach((item) => {
+		// 	item.addEventListener('click', (event) => {
+		// 		let target = event.target;
+
+		// 		category = target.getAttribute('data-category');
+		// 	});
+		// });
+		let currentCategory = handleCategory();
+		console.log(currentCategory);
+
+		const todoObj = {
+			category: currentCategory,
+			taskName: taskInput.value,
+			completed: false,
+			id: counter,
+			createdAt: new Date().getTime(),
+		};
+
+		todoArr.push(todoObj);
+		console.log(todoArr);
+				
+		taskInput.value = '';
+
 	} else {
-		taskInput.placeholder = 'Add new task';		
+		taskInput.placeholder = 'Add new task';
 	}
 	handleModal();
 }
 
-taskList.addEventListener('click', (event) => {
+
+taskList.addEventListener('click', handleCopletedTask);
+
+function handleCopletedTask(event) {
 	let target = event.target;
 	if (target.tagName !== 'INPUT' && target.type !== 'checkbox') return;
 	if (target.checked) {
@@ -114,7 +149,7 @@ taskList.addEventListener('click', (event) => {
 	} else {
 		target.nextSibling.classList.remove('completed-task');
 	}
-});
+}
 
 taskList.addEventListener('click', deleteTask);
 
@@ -128,6 +163,17 @@ function deleteTask(event) {
 	}
 }
 
-function editTask() {
 
+
+function handleCategory() {
+	const options = document.querySelectorAll('.bubble');
+	options.forEach(item => {
+		item.addEventListener('click', (event) => {
+			let target = event.target;
+			category = target.getAttribute('data-category');		
+
+			console.log(category)
+			return category;
+		});
+	});
 }

@@ -52,7 +52,7 @@
 						<button class="btn add-task__btn">Add</button>
 					</div>
 					<div class="task__list">
-						<div class="start__text">No tasks</div>
+						<div class="start__text">Task list is empty</div>
 					</div>
 				</div>
 			</section>
@@ -67,20 +67,20 @@
 					<div class="options">
 					<label>
 						<input type="radio" name="category" id="category1" value="personal" /> 
-						<span class="bubble business"></span>
+						<span class="bubble" data-category="personal"></span>
 						<div>Personal</div>
 					</label>
 					<label>
 						<input type="radio" name="category" id="category2" value="study" />
-						<span class="bubble personal"></span>
+						<span class="bubble" data-category="study"></span>
 						<div>Study</div>
 					</label>
 					<label>
 						<input type="radio" name="category" id="category2" value="work" />
-						<span class="bubble work"></span>
+						<span class="bubble" data-category="work"></span>
 						<div>Work</div>
 					</label>
-					<button class="btn category-btn">Save</button>
+					<button type="submit" class="btn category-btn">Save</button>
 				</div>
                 </form>
             </div>
