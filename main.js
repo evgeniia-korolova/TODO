@@ -9,10 +9,13 @@ const modalCloseBtn = document.querySelector('.modal__close');
 const options = document.querySelectorAll('.bubble');
 
 let counter = 0,
-	category = '';
+	currentCategory = '',
+	category;
+
+	
 
 
-console.log(setDate());
+
 
 addTaskBtn.addEventListener('click', handleModal);
 modalCloseBtn.addEventListener('click', handleModal);
@@ -25,9 +28,7 @@ function handleModal() {
 		const modal = document.querySelector('.modal');
 		modal.classList.toggle('hidden');
 
-		startMessage.classList.add('hidden');
-
-		
+		startMessage.classList.add('hidden');		
 		
 	} else {
 		taskInput.placeholder = 'Add new task';		
@@ -72,7 +73,19 @@ function createTask(task) {
 	return taskBlock;
 }
 
+function createNewObject(category) {
+	options.forEach((item) => {
+			item.addEventListener('click', (event) => {
+				let target = event.target;
 
+				category = target.getAttribute('data-category');
+			});
+		});
+		// currentCategory = category;
+		
+	console.log(category);
+	return category;
+}
 
 function addTaskHandler(event) {
 	event.preventDefault();
@@ -83,26 +96,29 @@ function addTaskHandler(event) {
 		let newTask = createTask(taskInput.value);
 
 		taskList.append(newTask);
-		counter++;
+		// counter++;
 
-		let currentCategory;
+		// let currentCategory;
+		
+
+		const todoObj = {
+			category: '',
+			taskName: taskInput.value,
+			completed: false,
+			id: todoArr.length,
+			createdAt: new Date().getTime(),
+		};
+
 		options.forEach((item) => {
 			item.addEventListener('click', (event) => {
 				let target = event.target;
 
 				category = target.getAttribute('data-category');
 			});
-			currentCategory = category;
 		});
+		currentCategory = category;
+		todoObj.category = currentCategory;
 		console.log(currentCategory);
-
-		const todoObj = {
-			category: currentCategory,
-			taskName: taskInput.value,
-			completed: false,
-			id: counter,
-			createdAt: new Date().getTime(),
-		};
 
 		todoArr.push(todoObj);
 		console.log(todoArr);
@@ -125,6 +141,7 @@ function handleCopletedTask(event) {
 	if (target.tagName !== 'INPUT' && target.type !== 'checkbox') return;
 	if (target.checked) {
 		target.nextSibling.classList.add('completed-task');
+		todoObj.completed = true;
 	} else {
 		target.nextSibling.classList.remove('completed-task');
 	}

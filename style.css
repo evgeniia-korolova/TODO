@@ -94,6 +94,10 @@ ul {
 	padding: 30px;
 }
 
+.handle-form__btn {
+	margin-bottom: 20px;
+}
+
 .menu__list {
     display: flex;
     flex-direction: column;
@@ -116,7 +120,8 @@ ul {
 .task-input {
 	flex-grow: 1;
 	padding: .3rem 1.4rem;
-	border: none;
+	border: 1px solid var(--accent-color);
+
 }
 
 .add-task__btn {

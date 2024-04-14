@@ -42,15 +42,8 @@
 			</section>
 			<section class="list">
 				<div class="list__container">
-					<div class="input__panel">
-						
-						<input
-						class="task-input"
-							type="text"
-							id="task-input"
-							autocomplete="off" />
-						<button class="btn add-task__btn">Add</button>
-					</div>
+					<button class="btn handle-form__btn">Add task</button>
+					
 					<div class="task__list">
 						<div class="start__text">Task list is empty</div>
 					</div>
@@ -61,8 +54,19 @@
 		<div class="modal hidden">
         <div class="modal__dialog">
             <div class="modal__content">
-                <form action="#">
+                <form action="#" id="new-todo-form">
+					
                     <div class="modal__close" data-close>&times;</div>
+					<div class="input__panel">
+						
+						<input
+						class="task-input"
+							type="text"
+							id="task-input"
+							name="content"
+							autocomplete="off" />
+						<!-- <button class="btn add-task__btn">Add</button> -->
+					</div>
                     <h4 class="modal__title">Pick a category</h4>
 					<div class="options">
 					<label>
@@ -80,7 +84,7 @@
 						<span class="bubble" data-category="work"></span>
 						<div>Work</div>
 					</label>
-					<button type="submit" class="btn category-btn">Save</button>
+					<input type="submit" class="btn category-btn" value="Save"></input>
 				</div>
                 </form>
             </div>
@@ -88,6 +92,7 @@
     </div>
 		</main>
 		
-		<script src="./main.js"></script>
+		<!-- <script src="./main.js"></script> -->
+		<script src="./app.js"></script>
 	</body>
 </html>
