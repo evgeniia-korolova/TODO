@@ -10,41 +10,7 @@ const options = document.querySelectorAll('.bubble');
 
 let counter = 0,
 	category = '';
-function showTime() {
-	const timeDiv = document.createElement('div');
-	timeDiv.classList.add('header__time');
-	timeDiv.textContent = setDate();
-	headerWrapper.append(timeDiv);
-}
-showTime();
 
-function getZero(num) {
-	if (num >= 0 && num < 10) {
-		return '0' + num;
-	} else {
-		return num;
-	}
-}
-
-function setDate() {
-	const now = new Date();
-	let currentMonth, currentDate, currentHour, currentMinutes;
-
-	let month = now.getMonth() + 1;
-	currentMonth = getZero(month);
-
-	let date = now.getDate();
-	currentDate = getZero(date);
-
-	let hours = now.getHours();
-	currentHour = getZero(hours);
-
-	let minutes = now.getMinutes();
-	currentMinutes = getZero(minutes);
-
-	let currentTime = `${currentDate}.${currentMonth}.${now.getFullYear()}  ${currentHour}:${currentMinutes}`;
-	return currentTime;
-}
 
 console.log(setDate());
 
@@ -56,14 +22,15 @@ formTaskBtn.addEventListener('click', addTaskHandler);
 function handleModal() {	
 
 	if (taskInput.value) {
-		startMessage.classList.add('hidden');
-
 		const modal = document.querySelector('.modal');
 		modal.classList.toggle('hidden');
+
+		startMessage.classList.add('hidden');
+
+		
 		
 	} else {
-		taskInput.placeholder = 'Add new task';
-		
+		taskInput.placeholder = 'Add new task';		
 	}
 	
 }
@@ -111,21 +78,22 @@ function addTaskHandler(event) {
 	event.preventDefault();
 	if (taskInput.value) {
 		startMessage.classList.add('hidden');
+		
 
 		let newTask = createTask(taskInput.value);
 
 		taskList.append(newTask);
 		counter++;
 
-		// let category;
-		// options.forEach((item) => {
-		// 	item.addEventListener('click', (event) => {
-		// 		let target = event.target;
+		let currentCategory;
+		options.forEach((item) => {
+			item.addEventListener('click', (event) => {
+				let target = event.target;
 
-		// 		category = target.getAttribute('data-category');
-		// 	});
-		// });
-		let currentCategory = handleCategory();
+				category = target.getAttribute('data-category');
+			});
+			currentCategory = category;
+		});
 		console.log(currentCategory);
 
 		const todoObj = {
@@ -138,12 +106,15 @@ function addTaskHandler(event) {
 
 		todoArr.push(todoObj);
 		console.log(todoArr);
+		handleModal();
+		
+		taskInput.value = '';
 		
 	} else {
 		taskInput.placeholder = 'Add new task';
 	}
-	handleModal();
-	taskInput.value = '';
+	
+	
 }
 
 
@@ -173,15 +144,51 @@ function deleteTask(event) {
 
 
 
-function handleCategory() {
-	const options = document.querySelectorAll('.bubble');
-	options.forEach(item => {
-		item.addEventListener('click', (event) => {
-			let target = event.target;
-			category = target.getAttribute('data-category');		
+// function handleCategory() {
+// 	const options = document.querySelectorAll('.bubble');
+// 	options.forEach(item => {
+// 		item.addEventListener('click', (event) => {
+// 			let target = event.target;
+// 			category = target.getAttribute('data-category');		
 
-			console.log(category)
-			return category;
-		});
-	});
+// 			console.log(category)
+// 			return category;
+// 		});
+// 	});
+// }
+
+function showTime() {
+	const timeDiv = document.createElement('div');
+	timeDiv.classList.add('header__time');
+	timeDiv.textContent = setDate();
+	headerWrapper.append(timeDiv);
+}
+showTime();
+
+function getZero(num) {
+	if (num >= 0 && num < 10) {
+		return '0' + num;
+	} else {
+		return num;
+	}
+}
+
+function setDate() {
+	const now = new Date();
+	let currentMonth, currentDate, currentHour, currentMinutes;
+
+	let month = now.getMonth() + 1;
+	currentMonth = getZero(month);
+
+	let date = now.getDate();
+	currentDate = getZero(date);
+
+	let hours = now.getHours();
+	currentHour = getZero(hours);
+
+	let minutes = now.getMinutes();
+	currentMinutes = getZero(minutes);
+
+	let currentTime = `${currentDate}.${currentMonth}.${now.getFullYear()}  ${currentHour}:${currentMinutes}`;
+	return currentTime;
 }
