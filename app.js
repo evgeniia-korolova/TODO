@@ -116,19 +116,27 @@ function deleteTask(event) {
 taskList.addEventListener('click', editTask);
 
 function editTask(event) {
-	let target = event.target;
+    let target = event.target; //button
+    const editedTask = target.previousSibling;
+    if (target.textContent.toLowerCase() == 'edit') {
+        target.textContent = 'Save';
+    } else {
+        target.textContent = 'Edit';
+    }
 	if (target.classList.contains('edit-task__btn')) {
-		const editedTask = target.previousSibling;
+		
 		editedTask.removeAttribute('readonly');
 		editedTask.focus();
-		target.textContent = 'Save';
+		
 
 		editedTask.addEventListener(
 			'blur',
-			() => {
+            (e) => {
+                console.log(e.target)
 				editedTask.setAttribute('readonly', '');
 				todo.content = editedTask.value;
-				target.textContent = 'Edit';
+                // target.textContent = 'Edit';
+                // editedTask.nextSibling.textContent = 'Edit';
                 createTask();
 			},
 			true
