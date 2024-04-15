@@ -120,30 +120,22 @@ function editTask(event) {
     const editedTask = target.previousSibling;
     if (target.textContent.toLowerCase() == 'edit') {
         target.textContent = 'Save';
+        editedTask.removeAttribute('readonly');
+		editedTask.focus();
     } else {
         target.textContent = 'Edit';
-    }
-	if (target.classList.contains('edit-task__btn')) {
-		
-		editedTask.removeAttribute('readonly');
-		editedTask.focus();
-		
-
-		editedTask.addEventListener(
+        editedTask.addEventListener(
 			'blur',
-            (e) => {
-                console.log(e.target)
+			(e) => {
+				console.log(e.target);
 				editedTask.setAttribute('readonly', '');
 				todo.content = editedTask.value;
-                // target.textContent = 'Edit';
-                // editedTask.nextSibling.textContent = 'Edit';
-                createTask();
+				createTask();
 			},
 			true
 		);
-
-		console.log(target);
-	}
+    }
+	
 }
 
 
