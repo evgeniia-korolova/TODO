@@ -160,9 +160,13 @@ ul {
 	flex: 1 1 0%;
 }
 
-.task__text:focus {
-	background: #fff;
+.task__text:not(:read-only) {
+	color: var(--accent-color);
 }
+
+/* .task__text:focus {
+	background: #fff;
+} */
 
 .task-input__warning {
 	border: 1px solid var(--warning-color);
