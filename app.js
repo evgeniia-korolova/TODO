@@ -28,17 +28,20 @@ newTodoForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 
 	// let task = taskInput.value;
-	let currentContent = e.target.elements.content.value;
+	let currentContent = e.target.elements.content.value.trim();
 	let currentCategory = e.target.elements.category.value;
 
 	if (!currentContent) {
 		taskInput.placeholder = 'Add new task';
-		taskInput.classList.toggle('task-input__warning');
+		taskInput.classList.add('task-input__warning');
+		return;
 	} else if (!currentCategory) {
 		document.querySelector('.modal__title ').classList.add('warning');
+		return;
 	} else {
 		startMessage.classList.add('hidden');
 		document.querySelector('.modal__title ').classList.remove('warning');
+		taskInput.classList.remove('task-input__warning');
 
 		todo = {
 			content: currentContent,
@@ -49,7 +52,7 @@ newTodoForm.addEventListener('submit', (e) => {
 		};
 
 		todos.push(todo);
-		let newTask = createTask(taskInput.value);
+		let newTask = createTask(taskInput.value.trim());
 
 		taskList.append(newTask);
 		e.target.reset(currentContent);
@@ -93,6 +96,7 @@ taskList.addEventListener('click', handleCopletedTask);
 
 function handleCopletedTask(event) {
 	let target = event.target;
+	console.log(target)
 	if (target.tagName !== 'INPUT' && target.type !== 'checkbox') return;
 	if (target.checked) {
 		target.nextSibling.classList.add('completed-task');
@@ -116,25 +120,28 @@ function deleteTask(event) {
 taskList.addEventListener('click', editTask);
 
 function editTask(event) {
-    let target = event.target; //button
-    const editedTask = target.previousSibling;
-    if (target.textContent.toLowerCase() == 'edit') {
-        target.textContent = 'Save';
-        editedTask.removeAttribute('readonly');
-		editedTask.focus();
-    } else {
-        target.textContent = 'Edit';
-        editedTask.addEventListener(
-			'blur',
-			(e) => {
-				console.log(e.target);
-				editedTask.setAttribute('readonly', '');
-				todo.content = editedTask.value;
-				createTask();
-			},
-			true
-		);
-    }
+	let target = event.target; //button
+	if (target.tagName == "BUTTON") {
+		const editedTask = target.previousSibling;
+		if (target.textContent.toLowerCase() == 'edit') {
+			target.textContent = 'Save';
+			editedTask.removeAttribute('readonly');
+			editedTask.focus();
+		} else {
+			target.textContent = 'Edit';
+			editedTask.addEventListener(
+				'blur',
+				(e) => {
+					console.log(e.target);
+					if (!editedTask) return;
+					editedTask.setAttribute('readonly', '');
+					todo.content = editedTask.value;
+					createTask();
+				},
+				true
+			);
+		}
+	}
 	
 }
 

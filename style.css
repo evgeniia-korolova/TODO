@@ -146,6 +146,7 @@ ul {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
+	flex: 1 1 0%;
 	
 }
 
@@ -157,16 +158,13 @@ ul {
 	display: block;
 	flex-grow: 1;
 	font-family: 'Roboto', sans-serif;
-	flex: 1 1 0%;
+	
 }
 
 .task__text:not(:read-only) {
 	color: var(--accent-color);
 }
 
-/* .task__text:focus {
-	background: #fff;
-} */
 
 .task-input__warning {
 	border: 1px solid var(--warning-color);
