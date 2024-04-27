@@ -49,6 +49,7 @@ newTodoForm.addEventListener('submit', (e) => {
 			completed: false,
 			id: todos.length + 1,
 			createdAt: new Date().getTime(),
+			deleted: false,
 		};
 
 		todos.push(todo);
@@ -114,6 +115,7 @@ function deleteTask(event) {
 	if (action) {
 		target.parentElement.classList.remove('task-block');
 		target.parentElement.classList.add('hidden');
+		todo.deleted = true;
 	}
 }
 
@@ -144,6 +146,40 @@ function editTask(event) {
 	}
 	
 }
+
+const personalSort = document.querySelector('#personal');
+// personalSort.addEventListener('click', () => {
+// 	// console.log(todos);
+// 	const personalTasks = todos.filter(todo => todo.category == 'personal');
+// 	console.log(personalTasks);
+// })
+
+function filterByCategory(e) {
+	// let category = todos.todo.category;
+	let category = e.target.id;
+	switch (category) {
+		case 'personal':
+			console.log(todos.filter((todo) => todo.category == 'personal' && todo.deleted == false));
+			break;
+		case 'work':
+			console.log(
+				todos.filter(
+					(todo) => todo.category == 'work' && todo.deleted == false
+				)
+			);
+			break;
+		case 'study':
+			console.log(
+				todos.filter(
+					(todo) => todo.category == 'study' && todo.deleted == false
+				)
+			);
+			break;
+		
+	}
+}
+
+document.querySelector('.menu__list').addEventListener('click', filterByCategory);
 
 
 function showTime() {

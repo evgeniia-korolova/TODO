@@ -105,6 +105,10 @@ ul {
     gap: 20px;
 	
 }
+
+.list__item {
+	cursor: pointer;
+}
 .list {
 	flex-basis: 70%;
 }
