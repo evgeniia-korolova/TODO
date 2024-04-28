@@ -113,8 +113,9 @@ ul {
 	flex-basis: 70%;
 }
 
-.task__date{
+.task__date {
 	font-size: 16px;
+	display: inline;
 }
 
 .input__panel {
@@ -154,8 +155,7 @@ ul {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	flex: 1 1 0%;
-	
+	flex: 1 1 0%;	
 }
 
 .task__text {

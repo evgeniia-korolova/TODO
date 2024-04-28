@@ -191,9 +191,9 @@ function filterByCategory(e) {
 			renderSorted(completedArr);
 			break;
 		case 'all':
-			
+			const allArr = (todos.filter(todo => todo.deleted == false))
 				
-			renderSorted(todos);
+			renderSorted(allArr);
 			break;
 		
 	}
@@ -208,13 +208,13 @@ function renderSorted(arr) {
 
 		taskList.innerHTML +=
 		`
-		<li class="task-blok>
+		<li class="task-block">
 		<p class="task__date">${todo.taskDate}</p>
-		<input type="checkbox">
+		<input type="checkbox" ${todo.completed}>
 		<input type="text" class="task__text" readonly="" value=${todo.content}>
 		<button class="btn edit-task__btn">Edit</button>
-		<button	class='delete-task__btn' data-delete-btn='delete-task__btn'></button>;
-	</li>
+		<button	class='delete-task__btn' data-delete-btn='delete-task__btn'></button>
+		</li>
 		`;
 		
 	})
