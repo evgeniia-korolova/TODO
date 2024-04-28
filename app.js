@@ -190,6 +190,11 @@ function filterByCategory(e) {
 			);
 			renderSorted(completedArr);
 			break;
+		case 'all':
+			
+				
+			renderSorted(todos);
+			break;
 		
 	}
 }
