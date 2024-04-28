@@ -20,7 +20,7 @@ let counter = 0,
 addTaskBtn.addEventListener('click', handleModal);
 modalCloseBtn.addEventListener('click', handleModal);
 formTaskBtn.addEventListener('click', addTaskHandler);
-// formTaskBtn.addEventListener('click', handleCategory);
+
 
 function handleModal() {	
 
@@ -96,10 +96,7 @@ function addTaskHandler(event) {
 		let newTask = createTask(taskInput.value);
 
 		taskList.append(newTask);
-		// counter++;
-
-		// let currentCategory;
-		
+				
 
 		const todoObj = {
 			category: '',
@@ -161,18 +158,6 @@ function deleteTask(event) {
 
 
 
-// function handleCategory() {
-// 	const options = document.querySelectorAll('.bubble');
-// 	options.forEach(item => {
-// 		item.addEventListener('click', (event) => {
-// 			let target = event.target;
-// 			category = target.getAttribute('data-category');		
-
-// 			console.log(category)
-// 			return category;
-// 		});
-// 	});
-// }
 
 function showTime() {
 	const timeDiv = document.createElement('div');

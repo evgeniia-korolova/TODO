@@ -113,6 +113,10 @@ ul {
 	flex-basis: 70%;
 }
 
+.task__date{
+	font-size: 16px;
+}
+
 .input__panel {
 	margin-bottom: 1.2rem;
 	padding: 0 25px;

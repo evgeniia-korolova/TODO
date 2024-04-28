@@ -48,6 +48,7 @@ newTodoForm.addEventListener('submit', (e) => {
 			category: currentCategory,
 			completed: false,
 			id: todos.length + 1,
+			taskDate: setTaskDate(),
 			createdAt: new Date().getTime(),
 			deleted: false,
 		};
@@ -65,10 +66,15 @@ newTodoForm.addEventListener('submit', (e) => {
 });
 
 function createTask(task) {
-	let taskBlock = document.createElement('div');
+	let taskBlock = document.createElement('li');
 	taskBlock.classList.add('task-block');
 	let checkbox = document.createElement('input');
 	checkbox.type = 'checkbox';
+
+	let createDate = document.createElement('p');
+	createDate.textContent = setTaskDate();
+	createDate.classList.add('task__date');
+
 
 	let taskText = document.createElement('input');
 	taskText.value = task;
@@ -85,6 +91,7 @@ function createTask(task) {
 	changeTaskBtn.classList.add('btn', 'edit-task__btn');
 	changeTaskBtn.textContent = 'Edit';
 
+	taskBlock.append(createDate);
 	taskBlock.append(checkbox);
 	taskBlock.append(taskText);
 	taskBlock.append(changeTaskBtn);
@@ -97,12 +104,14 @@ taskList.addEventListener('click', handleCopletedTask);
 
 function handleCopletedTask(event) {
 	let target = event.target;
-	console.log(target)
+	
 	if (target.tagName !== 'INPUT' && target.type !== 'checkbox') return;
 	if (target.checked) {
 		target.nextSibling.classList.add('completed-task');
+		todo.completed = true;
 	} else {
 		target.nextSibling.classList.remove('completed-task');
+		todo.completed = false;
 	}
 }
 
@@ -147,39 +156,67 @@ function editTask(event) {
 	
 }
 
-const personalSort = document.querySelector('#personal');
-// personalSort.addEventListener('click', () => {
-// 	// console.log(todos);
-// 	const personalTasks = todos.filter(todo => todo.category == 'personal');
-// 	console.log(personalTasks);
-// })
 
 function filterByCategory(e) {
-	// let category = todos.todo.category;
+	taskList.innerHTML = '';
+	startMessage.classList.add('hidden');
 	let category = e.target.id;
 	switch (category) {
 		case 'personal':
-			console.log(todos.filter((todo) => todo.category == 'personal' && todo.deleted == false));
+			const persArr = (todos.filter((todo) => todo.category == 'personal' && todo.deleted == false));
+			renderSorted(persArr);
 			break;
 		case 'work':
-			console.log(
+			const workArr = (
 				todos.filter(
 					(todo) => todo.category == 'work' && todo.deleted == false
 				)
 			);
+			renderSorted(workArr);
 			break;
 		case 'study':
-			console.log(
+			const studyArr = (
 				todos.filter(
 					(todo) => todo.category == 'study' && todo.deleted == false
 				)
 			);
+			renderSorted(studyArr);
+			break;
+		case 'completed':
+			const completedArr = (
+				todos.filter(
+					(todo) => todo.completed === true && todo.deleted == false
+				)
+			);
+			renderSorted(completedArr);
 			break;
 		
 	}
 }
 
 document.querySelector('.menu__list').addEventListener('click', filterByCategory);
+
+function renderSorted(arr) {
+	
+
+	arr.forEach(todo => {
+
+		taskList.innerHTML +=
+		`
+		<li class="task-blok>
+		<p class="task__date">${todo.taskDate}</p>
+		<input type="checkbox">
+		<input type="text" class="task__text" readonly="" value=${todo.content}>
+		<button class="btn edit-task__btn">Edit</button>
+		<button	class='delete-task__btn' data-delete-btn='delete-task__btn'></button>;
+	</li>
+		`;
+		
+	})
+
+
+
+}
 
 
 function showTime() {
@@ -215,5 +252,19 @@ function setDate() {
 	currentMinutes = getZero(minutes);
 
 	let currentTime = `${currentDate}.${currentMonth}.${now.getFullYear()}  ${currentHour}:${currentMinutes}`;
+	return currentTime;
+}
+
+function setTaskDate() {
+	const now = new Date();
+	let currentMonth, currentDate, currentHour, currentMinutes;
+
+	let month = now.getMonth() + 1;
+	currentMonth = getZero(month);
+
+	let date = now.getDate();
+	currentDate = getZero(date);
+	
+	let currentTime = `${currentDate}.${currentMonth}.${now.getFullYear()}`;
 	return currentTime;
 }
