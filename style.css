@@ -10,13 +10,6 @@
 	--warning-color: rgb(236, 5, 5);
 }
 
-/* input:not([type="radio"]):not([type="checkbox"]), button {
-	appearance: none;
-	border: none;
-	outline: none;
-	background: none;
-	cursor: initial;
-} */
 
 body {
 	font-family: 'Roboto', sans-serif;
@@ -26,6 +19,10 @@ body {
 
 ul {
 	list-style: none;
+}
+
+a {
+	font-size: 16px;
 }
 
 .btn {
@@ -65,7 +62,7 @@ ul {
 }
 
 .header__time {
-	font-size: 28px;
+	font-size: 18px;
 	color: var(--accent-color);
 }
 
@@ -79,7 +76,7 @@ ul {
 }
 .menu__container,
 .list__container {
-	padding: 50px;
+	padding: 30px;
 	background: rgb(250, 231, 250);
 	box-shadow: 4px 4px 6px var(--accent-color),
 		-4px -4px 6px var(--accent-color),
@@ -92,7 +89,7 @@ ul {
 
 .list__container {
 	flex-grow: 1;
-	padding: 30px;
+	padding: 20px 30px;
 }
 
 .handle-form__btn {
@@ -102,12 +99,17 @@ ul {
 .menu__list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 	
 }
 
 .list__item {
 	cursor: pointer;
+	font-size: 18px;
+
+	&:hover {
+		color: var(--accent-color);
+	}
 }
 .list {
 	flex-basis: 70%;
@@ -198,6 +200,18 @@ input[type="checkbox"] {
 	cursor: pointer;
     margin-left: auto;
 }
+.delete-task__btn-test {
+	width: 28px;
+	height: 28px;
+	border: none;
+	outline: none;
+	background: transparent;
+	
+	cursor: pointer;
+    margin-left: auto;
+}
+
+
 
 /* modal */
 

@@ -27,7 +27,6 @@ modalCloseBtn.addEventListener('click', handleModal);
 newTodoForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 
-	// let task = taskInput.value;
 	let currentContent = e.target.elements.content.value.trim();
 	let currentCategory = e.target.elements.category.value;
 

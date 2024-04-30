@@ -1,4 +1,5 @@
 const taskInput = document.querySelector('#task-input');
+const modal = document.querySelector('.modal');
 const addTaskBtn = document.querySelector('.add-task__btn');
 const taskList = document.querySelector('.task__list');
 const startMessage = document.querySelector('.start__text');
@@ -7,34 +8,23 @@ const headerWrapper = document.querySelector('.header__container');
 const formTaskBtn = document.querySelector('.category-btn');
 const modalCloseBtn = document.querySelector('.modal__close');
 const options = document.querySelectorAll('.bubble');
+const handleFormBtn = document.querySelector('.handle-form__btn')
 
 let counter = 0,
 	currentCategory = '',
-	category;
-
-	
+	category;	
 
 
+function handleModal() {
+	modal.classList.toggle('hidden');
+}
 
-
-addTaskBtn.addEventListener('click', handleModal);
+handleFormBtn.addEventListener('click', handleModal);
 modalCloseBtn.addEventListener('click', handleModal);
 formTaskBtn.addEventListener('click', addTaskHandler);
 
 
-function handleModal() {	
 
-	if (taskInput.value) {
-		const modal = document.querySelector('.modal');
-		modal.classList.toggle('hidden');
-
-		startMessage.classList.add('hidden');		
-		
-	} else {
-		taskInput.placeholder = 'Add new task';		
-	}
-	
-}
 
 
 
@@ -54,12 +44,12 @@ function createTask(task) {
 	let deleteBtn = document.createElement('button');
 
 	deleteBtn.classList.add('delete-task__btn');
-	deleteBtn.setAttribute('data-delete-btn', 'delete-task__btn');
-	// let deleteBtnImg = document.createElement('img');
-	// deleteBtnImg.src = './img/garbage-bin.svg';
-	// deleteBtnImg.classList.add('delete-btn__img');
-	// deleteBtnImg.setAttribute('data-delete-btn', 'delete-task__btn');
-	// deleteBtn.append(deleteBtnImg);
+	deleteBtn.setAttribute('data-delete-btn', 'delete-task__btn-test');
+	let deleteBtnImg = document.createElement('img');
+	deleteBtnImg.src = './img/garbage-bin.svg';
+	deleteBtnImg.classList.add('delete-btn__img');
+	deleteBtnImg.setAttribute('data-delete-btn', 'delete-task__btn');
+	deleteBtn.append(deleteBtnImg);
 
 	let changeTaskBtn = document.createElement('button');
 	changeTaskBtn.classList.add('btn');
@@ -131,9 +121,9 @@ function addTaskHandler(event) {
 }
 
 
-taskList.addEventListener('click', handleCopletedTask);
+taskList.addEventListener('click', handleCompletedTask);
 
-function handleCopletedTask(event) {
+function handleCompletedTask(event) {
 	let target = event.target;
 	if (target.tagName !== 'INPUT' && target.type !== 'checkbox') return;
 	if (target.checked) {
@@ -151,8 +141,8 @@ function deleteTask(event) {
 	let action = target.dataset.deleteBtn;
 
 	if (action) {
-		target.parentElement.classList.remove('task-block');
-		target.parentElement.classList.add('hidden');
+		target.parentElement.parentElement.classList.remove('task-block');
+		target.parentElement.parentElement.classList.add('hidden');
 	}
 }
 
